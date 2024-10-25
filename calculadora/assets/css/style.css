@@ -4,6 +4,7 @@
     margin: 0px;
     padding: 0px;
     font-family: 'Helvetica', sans-serif;
+    font-size: 1em;
 }
 
 html{
@@ -33,36 +34,64 @@ table{
     left: 41.4%;
     width: 268px;
     border-collapse: separate;
-    border-spacing: 5px;
+    border-spacing: 3px;
 }
 
 td{
-    width: 40px;
-    height: 40px;
-    border: 1px solid black;
+    width: 45px;
+    height: 45px;
     text-align: center;
     padding: 8px;
     margin: 5px;
     border-radius: 100%;
-    cursor: pointer;
     font-size: 1.5em;
 }
 
-td.btn-num{
+td > button.btn-num{
     background-color: #333333;
     color: white;
+    width: 110%;
+    height: 110%;
+    border-radius: 100%;
+    cursor: pointer;
 }
 
-td.btn-dir{
+td > button.btn-dir{
     background-color: #FF9F0A;
     color: white;
     border-color: #b46f08;
+    width: 110%;
+    height: 110%;
+    cursor: pointer;
+    border-radius: 100%;
 }
 
-td.btn-cima{
+td > button.btn-cima{
     background-color: #A5A5A5;
+    width: 110%;
+    height: 110%;
+    cursor: pointer;
+    border-radius: 100%;
 }
 
 p#visor{
-    height: 70px;
+    width: 268px;
+    height: 77px;
+    color: white;
+    position: absolute;
+    top: 32%;
+    left: 41%;
+    font-size: 2.7em;
+    text-align: right;
+}
+
+button {
+    border: none; /* Remove borda padrão */
+    outline: none; /* Remove outline padrão */
+    box-shadow: none; /* Remove a sombra padrão */
+}
+
+button:active{
+    transform: scale(0.95); /* Reduz o tamanho do botão ligeiramente*/
+    background-color: #ccc; /* Muda a cor de fundo temporariamente */
 }

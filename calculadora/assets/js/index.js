@@ -1,7 +1,9 @@
 function calculadora(){
     return{
         visor: document.querySelector('p#visor'),
-
+        operador: '',
+        num: [''],
+        resultado: 0,
 
         inicia(){   
             this.clique()
@@ -12,17 +14,26 @@ function calculadora(){
                 const el = e.target
                 if(el.classList.contains('btn-num')){
                     this.btnParaVisor(el.innerText)
+                    this.num.push(el.innerText)
                 } 
                 
-                if(el.classList.contains('btn-cima') && el.innerText === 'AC'){
-                    this.limpaVisor()
-                } 
-                if(el.classList.contains('btn-dir')){
-                    switch (el.innerText){
-                    case '+': 
+                if(el.classList.contains('btn-cima')){
+                    if(el.innerText === '(' || el.innerText === ')'){
                         this.btnParaVisor(el.innerText)
-                        break
-                }   
+                    }
+                    if(el.innerText === 'AC'){
+                    this.limpaVisor()
+                    this.resultado = 0
+                    } 
+                } 
+                
+                if(el.classList.contains('btn-dir') && el.innerText === '+' || el.innerText === '-' || el.innerText === '*' || el.innerText === '/'){
+                    this.operador = el.innerText
+                    this.btnParaVisor(el.innerText)   
+                }
+
+                if(el.classList.contains('btn-dir') && el.innerText === '='){
+                    this.operacao()
                 }
                 
             }.bind(this))
@@ -34,8 +45,28 @@ function calculadora(){
 
         limpaVisor(){
             this.visor.innerHTML = ''
-        }
+        },
 
+        operacao(){
+            let numeros = this.num.map(Number)
+            switch (this.operador){
+                case '+': 
+                    resultado = numeros.reduce((acc, num) => acc + num, 0)
+                    break
+                case '-':
+                    resultado = numeros.reduce((acc, num) => acc - num, 0)
+                    break
+                case '*':
+                    resultado = numeros.reduce((acc, num) => acc * num, 0)
+                    break  
+                case '/':
+                    resultado = numeros.reduce((acc, num) => acc / num, 0)
+                    break
+            }
+            this.visor.innerHTML = resultado  
+            this.num =[]
+            this.operador = ''
+        },
     }
 }
 

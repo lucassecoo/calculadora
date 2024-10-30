@@ -4,7 +4,7 @@ function calculadora(){
         operador: '',
         num: [''],
         resultado: 0,
-
+        
         inicia(){   
             this.clique()
         },
@@ -14,7 +14,7 @@ function calculadora(){
                 const el = e.target
                 if(el.classList.contains('btn-num')){
                     this.btnParaVisor(el.innerText)
-                    this.num.push(el.innerText)
+                    this.num += el.innerText
                 } 
                 
                 if(el.classList.contains('btn-cima')){
@@ -26,10 +26,22 @@ function calculadora(){
                     this.resultado = 0
                     } 
                 } 
+
+                if(el.classList.contains('btn-del')){
+                    this.apagaUm()
+                }
                 
                 if(el.classList.contains('btn-dir') && el.innerText === '+' || el.innerText === '-' || el.innerText === '*' || el.innerText === '/'){
+                    let ultimoDigito = this.visor.innerText.slice(-1)
+                    if(['+', '-', '*', '/'].includes(ultimoDigito)){
+                        return
+                    } else{ 
+                        this.resultado = parseFloat(this.num)
                     this.operador = el.innerText
-                    this.btnParaVisor(el.innerText)   
+                    this.num = ''
+                    this.btnParaVisor(el.innerText)
+                    }
+                       
                 }
 
                 if(el.classList.contains('btn-dir') && el.innerText === '='){
@@ -45,23 +57,30 @@ function calculadora(){
 
         limpaVisor(){
             this.visor.innerHTML = ''
+            this.num = []   
+            this.operador = ''
+        },
+
+        apagaUm(){
+            this.num = this.num.slice(0, -1);
+            this.visor.innerHTML = this.visor.innerHTML.slice(0, -1);
         },
 
         operacao(){
-            let numeros = this.num.map(Number)
+            let numeroAtual = parseFloat(this.num)
             switch (this.operador){
                 case '+': 
-                    resultado = numeros.reduce((acc, num) => acc + num, 0)
-                    break
-                case '-':
-                    resultado = numeros.reduce((acc, num) => acc - num, 0)
-                    break
-                case '*':
-                    resultado = numeros.reduce((acc, num) => acc * num, 0)
-                    break  
-                case '/':
-                    resultado = numeros.reduce((acc, num) => acc / num, 0)
-                    break
+                resultado = this.resultado += numeroAtual;
+                break;
+            case '-':
+                resultado = this.resultado -= numeroAtual;
+                break;
+            case '*':
+                resultado = this.resultado *= numeroAtual;
+                break;  
+            case '/':
+                resultado = this.resultado /= numeroAtual;
+                break;
             }
             this.visor.innerHTML = resultado  
             this.num =[]

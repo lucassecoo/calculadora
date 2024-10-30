@@ -47,7 +47,7 @@ td{
     font-size: 1.5em;
 }
 
-td > button.btn-num{
+td > button.btn-num, button.btn-del{
     background-color: #333333;
     color: white;
     width: 110%;
@@ -86,12 +86,12 @@ p#visor{
 }
 
 button {
-    border: none; /* Remove borda padrão */
-    outline: none; /* Remove outline padrão */
-    box-shadow: none; /* Remove a sombra padrão */
+    border: none; 
+    outline: none; 
+    box-shadow: none; 
 }
 
 button:active{
-    transform: scale(0.95); /* Reduz o tamanho do botão ligeiramente*/
-    background-color: #ccc; /* Muda a cor de fundo temporariamente */
+    transform: scale(0.95); 
+    background-color: #ccc; 
 }
